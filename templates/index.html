@@ -1,9 +1,73 @@
-<html>
-    <head>
-        <title>Home Page</title>
-    </head>
-    <body>
-        <h1>Body</h1>
-        <p>Paragraph</p>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <!--viewport gör sidan responsiv till enhetens bredd, zoom nivå på 100%-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lösenordshanterare</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input, button {
+            display: block;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lösenordshanterare</h1>
+
+    <!-- Formulär för att lägga till lösenord -->
+    <h2>Lägg till lösenord</h2>
+    <form action="/add" method="POST">
+        <label for="service">Tjänst:</label>
+        <input type="text" id="service" name="service" placeholder="Ex. Gmail" required>
+
+        <label for="password">Lösenord:</label>
+        <input type="password" id="password" name="password" placeholder="Ange lösenord" required>
+
+        <button type="submit">Spara lösenord</button>
+    </form>
+
+    <!-- Formulär för att hämta lösenord -->
+    <h2>Hämta lösenord</h2>
+    <form action="/get" method="GET">
+        <label for="get-service">Tjänst:</label>
+        <input type="text" id="get-service" name="service" placeholder="Ex. Gmail" required>
+
+        <button type="submit">Hämta lösenord</button>
+    </form>
+
+    <!-- Formulär för att visa påminnelser -->
+    <h2>Visa påminnelser</h2>
+    <form action="/reminders" method="GET">
+        <button type="submit">Visa lösenord att uppdatera</button>
+    </form>
+</body>
 </html>
