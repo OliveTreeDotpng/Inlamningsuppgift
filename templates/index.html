@@ -38,6 +38,23 @@
         button:hover {
             background-color: #0056b3;
         }
+        .popup {
+            display: none; /* Dold som standard */
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+        }
+        .popup.show {
+            display: block; /* Visa popupen om klassen "show" finns */
+        }
     </style>
 </head>
 <body>
@@ -47,7 +64,7 @@
     <h2>Lägg till lösenord</h2>
     <form action="/add" method="POST">
         <label for="service">Tjänst:</label>
-        <input type="text" id="service" name="service" placeholder="Ex. Gmail" required>
+        <input type="text" id="service" name="service" placeholder="Ex. Steam" required>
 
         <label for="password">Lösenord:</label>
         <input type="password" id="password" name="password" placeholder="Ange lösenord" required>
@@ -55,11 +72,16 @@
         <button type="submit">Spara lösenord</button>
     </form>
 
+    <div class="popup {{ 'show' if success else '' }}">
+        Tjänst och lösenord har sparats!
+    </div>    
+
+
     <!-- Formulär för att hämta lösenord -->
     <h2>Hämta lösenord</h2>
     <form action="/get" method="GET">
         <label for="get-service">Tjänst:</label>
-        <input type="text" id="get-service" name="service" placeholder="Ex. Gmail" required>
+        <input type="text" id="get-service" name="service" placeholder="Ex. Steam" required>
 
         <button type="submit">Hämta lösenord</button>
     </form>
