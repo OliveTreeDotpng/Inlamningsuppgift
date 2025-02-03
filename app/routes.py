@@ -22,14 +22,14 @@ def add():
     
 
 @app.route("/get", methods=["POST"])
-def login():
+def get_password():
     service = request.form.get("service") # Hämta service från formuläret
-    password = request.form.get("password") # Hämta password från formuläret
     user = Account.query.filter_by(service=service).first() # Hämta användaren från databasen
-    if user and check_password_hash(user.password, password): # Om användaren finns och lösenordet stämmer
-        flash("Login successfull!")
+    
+    if user: # Om användaren finns
+        flash(f"The password for {service} is {user.password}") # Skicka lösenordet
         return redirect(url_for("home", success="true")) # Skicka till index.html med success
     else:
-        flash("Login failed. Try again.") # Annars skicka felmeddelande
+        flash(f"No password stored for {service}, try another one.") # Annars skicka felmeddelande
         return redirect(url_for("home")) 
 
