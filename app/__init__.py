@@ -11,7 +11,7 @@ def create_app():
     db.init_app(app)
     
     with app.app_context(): # Skapa appens kontext
-        from app import routes # Importera routes.py
+        from . import routes # Importera routes.py
         db.create_all() # Skapa databasen
     
     return app
