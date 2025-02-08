@@ -10,3 +10,4 @@ class Account(UserMixin, db.Model):
     service = db.Column(db.String(150), nullable=False, unique=True)
     hashed_password = db.Column(db.String(150), nullable=False)
     encrypted_password = db.Column(db.String(150), nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False) # Lagra datum och tid för när lösenordet skapades

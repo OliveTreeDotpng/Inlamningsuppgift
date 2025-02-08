@@ -15,6 +15,9 @@
         h1, h2 {
             color: #333;
         }
+        small-header {
+            font-size: 1.2em; /* Justera storleken efter behov */
+        }
         form {
             margin-bottom: 20px;
             padding: 10px;
@@ -102,8 +105,17 @@
 
     <!-- Formulär för att visa påminnelser -->
     <h2>Visa påminnelser</h2>
-    <form action="/reminders" method="GET">
+    <form action="/reminders" method="POST">
         <button type="submit">Visa lösenord att uppdatera</button>
     </form>
+
+    {% if old_accounts %}
+        <h3 class="small-header">Lösenord att kanske uppdatera?</h3> <!-- Mindre header -->
+        <ul>
+            {% for account in old_accounts %}
+                <li>{{ account.service }} - Created at: {{ account.created_at.strftime('%Y-%m-%d %H:%M') }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 </html>
