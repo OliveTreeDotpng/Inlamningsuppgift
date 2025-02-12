@@ -1,21 +1,27 @@
-# Service demo app
-
-## Getting started
+## Komma igång
 1. Installera paket: `pip install`
+2. Sedan: `pip install -r requirements.txt`
+
 
 ## Service architecture
 
-| DB | -> | Service | -> | App |
+[Database] ←→ [Backend Service] ←→ [Frontend]
 
-## CLI app
+Applikationen består av en databas (SQLite), en backend-tjänst (Flask) och en frontend (HTML i templates/index.html). Backend hanterar lösenord genom både hashing och kryptering samt visar varningar efter en viss tid.
+
+## Lösenordshantering webbapplikationen
 
 Here is a description of my app-
 
-- Punkt 1
-- Punkt 2
+- Användaren anger en tjänst (t.ex. Steam) och ett tillhörande lösenord.
 
-1. Nummer 1
-2. Nummer 2
+- Lösenordet lagras i databasen som en hash för säkerhet.
+
+- En enkel krypterings- och dekrypteringsmetod används vid sidan om för att tillfälligt kunna visa lösenordet i klartext.
+
+- Efter en förutbestämd tid (t.ex. 10 sekunder) varnas användaren om vilka lösenord som bör bytas ut om man klickar på visa lösenord att uppdatera.
+
+
 
 ### Rubrik 3
 

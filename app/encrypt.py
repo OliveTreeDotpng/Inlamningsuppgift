@@ -1,27 +1,39 @@
 import random  # A library that contains functions for generating random numbers
 import string  # A library that contains ASCII characters
+import os  # A library that contains functions for interacting with the operating system
 
-chars = " " + string.punctuation + string.digits + string.ascii_letters + "åäöÅÄÖ" # One string that contains all ASCII characters
-chars = list(chars) # Convert the string to a list
-key = chars.copy() # Copy the list
+KEY_FILE = "key.txt"  # Filnamn för att spara krypteringsnyckeln
 
-random.shuffle(key) # Shuffle the key
+# Skapar en sträng med alla ASCII-tecken och mellanslag
+chars = " " + string.punctuation + string.ascii_letters + string.digits + "åäöÅÄÖ" 
+chars = list(chars) # Gör om strängen till en lista 
+
+# Generera eller läs krypteringsnyckeln
+def load_key():
+    if os.path.exists(KEY_FILE): # Om filen finns
+        with open(KEY_FILE, "r") as file: # Öppna filen för att läsa
+            key = file.read() # Läser innehållet i filen
+    else: # Om filen inte finns 
+        key = chars.copy() # Kopiera listan till key 
+        random.shuffle(key)
+        with open(KEY_FILE, "w") as file: 
+            file.write("".join(key)) # Skriv nyckeln till filenyckeln
+    return key
+
+key = load_key() # Laddar krypteringsnyckeln från filenyckeln
 
 
+# Kryptera lösenord
+def encrypt(text):
+    encrypted_text = ""  # Tom sträng för att lagra det krypterade lösenordet
+    for char in text: # Loopar igenom varje tecken i texten aka lösenordet
+        index = chars.index(char) # Hämtar index för tecknet
+        encrypted_text += key[index] # Lägger till det krypterade tecknet
+    return encrypted_text # Returnerar det krypterade lösenordet
 
-#Encrypt function
-def encrypt(text):  
-    encrypted = "" # An empty string to store the encrypted text    
-    for char in text:       
-        index = chars.index(char) # Find the index of the character in the chars list  
-        encrypted += key[index] # Add the character at the same index in the key list to the encrypted string
-    return encrypted # Return the encrypted string to (text)
-
-#Decrypt function
 def decrypt(text):
-    decrypted = "" # An empty string to store the decrypted text
-    for char in text:
-        index = key.index(char) # Find the index of the character in the key list
-        decrypted += chars[index] # Add the character at the same index in the chars list to the decrypted string
-    return decrypted # Return the decrypted string to (text)
-
+    decrypted_text = ""  
+    for char in text: # Loopar igenom varje tecken i texten aka lösenordet
+        index = key.index(char) # Hämtar index för tecknet
+        decrypted_text += chars[index] # Lägger till det dekrypterade tecknet
+    return decrypted_text # Returnerar det dekrypterade lösenordet

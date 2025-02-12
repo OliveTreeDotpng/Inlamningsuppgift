@@ -1,13 +1,11 @@
 from flask import redirect, url_for, render_template, request, flash
-from werkzeug.security import check_password_hash, generate_password_hash 
+from werkzeug.security import generate_password_hash 
 from app.models import db, Account # Importera db och Account från models.py
 from flask import current_app as app # Importera app från __init__.py
 from app.encrypt import encrypt, decrypt # Importera encrypt och decrypt från encrypt.py
 from app.reminder import reminder # Importera reminder från timer.py
 from datetime import datetime, timedelta # Importera datetime för att räkna dagar
-import time # Importera time för reminder-funktionen
-import threading # Importera threading för att köra reminder-funktionen i bakgrunden
-
+import threading # Importera threading för att köra funktioner i bakgrunden
 
 @app.route("/")
 def home():
@@ -26,6 +24,9 @@ def add():
     db.session.add(new_account) # Lägg till i databasen
     db.session.commit() # Spara i databasen
     flash("Registration successfull! Try logging in.") 
+
+
+    threading.Thread(target=reminder, args=(service,)).start() # Starta en ny tråd för att köra reminder-funktionen för lösenordet
 
     reminder(service) # Starta reminder-funktionen i bakgrunden
     return redirect(url_for("home", success="true")) 
@@ -46,6 +47,6 @@ def get_password():
 
 @app.route("/reminders", methods=["POST"])
 def reminders():
-    threshold_time = datetime.now() - timedelta(seconds=60) # Räkna ut tiden för 30 dagar sedan
+    threshold_time = datetime.now() - timedelta(seconds=10) # Räkna ut tiden för 30 dagar sedan
     old_accounts = Account.query.filter(Account.created_at < threshold_time).all() # Hämta alla konton som är äldre än 60 sekunder
     return render_template("index.html", old_accounts=old_accounts) # Skicka med old_accounts till home
