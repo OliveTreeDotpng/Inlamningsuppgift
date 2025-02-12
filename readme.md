@@ -1,7 +1,16 @@
-## Komma igång
-1. Installera paket: `pip install`
-2. Sedan: `pip install -r requirements.txt`
-3. Kör `py.exe .\run.py`, se till så att du kör från övermappen dvs i samma mapp som `run.py` finns i.
+## Kom igång
+#### Skapa din venv:
+>python -m venv venv
+
+>.\venv\Scripts\activate
+
+#### Installera biblioteken
+>pip install -r requirements.txt
+
+>Sedan: `pip install -r requirements.txt`
+
+#### Starta applicationen
+>Kör `py.exe .\run.py`, se till så att du kör från övermappen dvs i samma mapp som `run.py` finns i.
 
 
 ## Service architecture
