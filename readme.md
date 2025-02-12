@@ -1,6 +1,7 @@
 ## Komma igång
 1. Installera paket: `pip install`
 2. Sedan: `pip install -r requirements.txt`
+3. Kör `py.exe .\run.py`, se till så att du kör från övermappen dvs i samma mapp som `run.py` finns i.
 
 
 ## Service architecture
@@ -11,7 +12,7 @@ Applikationen består av en databas (SQLite), en backend-tjänst (Flask) och en 
 
 ## Lösenordshantering webbapplikationen
 
-Here is a description of my app-
+Min app description:
 
 - Användaren anger en tjänst (t.ex. Steam) och ett tillhörande lösenord.
 
