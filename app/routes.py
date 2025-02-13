@@ -27,8 +27,8 @@ def add():
 
 
     threading.Thread(target=reminder, args=(service,)).start() # Starta en ny tråd för att köra reminder-funktionen för lösenordet
-
     reminder(service) # Starta reminder-funktionen i bakgrunden
+
     return redirect(url_for("home", success="true")) 
     
 
@@ -47,6 +47,6 @@ def get_password():
 
 @app.route("/reminders", methods=["POST"])
 def reminders():
-    threshold_time = datetime.now() - timedelta(seconds=10) # Räkna ut tiden för 30 dagar sedan
-    old_accounts = Account.query.filter(Account.created_at < threshold_time).all() # Hämta alla konton som är äldre än 60 sekunder
+    threshold_time = datetime.now() - timedelta(seconds=10) # Tiden som används för att filtrera konton som har gått ut
+    old_accounts = Account.query.filter(Account.created_at < threshold_time).all() # Hämta alla konton som är äldre än 10 sekunder
     return render_template("index.html", old_accounts=old_accounts) # Skicka med old_accounts till home
