@@ -33,14 +33,4 @@ Min app description:
 
 
 
-### Rubrik 3
-
-
-#### Exempel Config
-```python
-class config:
-    pass = secretpass
-```
-##### Rubrik 5
-
 
